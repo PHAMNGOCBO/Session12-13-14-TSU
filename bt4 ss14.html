@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài tập 4</title>
+</head>
+<body>
+    <script>
+        const original = {
+                name: 'Bob',
+                age: 30,
+                address: {
+                    city: 'Hà nội',
+                },
+            };
+
+            // copy object
+            const copy = JSON.parse(JSON.stringify(original));
+
+            original.address.city = 'Đồng Tháp';
+
+            // thay đổi thuộc tính name ở đối tượng copy
+            copy.name = 'Charlie';
+
+            // in cả 2 đối tượng
+            console.log(original);
+            console.log(copy);
+    </script>
+</body>
+</html>

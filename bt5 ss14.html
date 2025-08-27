@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý danh sách sinh viên</title>
+</head>
+<body>
+    <h2>Quản lý danh sách sinh viên</h2>
+
+    <h3>Thêm sinh viên mới</h3>
+    <form id="addStudentForm">
+        Tên: <input type="text" id="name" required>
+        Tuổi: <input type="number" id="age" required>
+        Mã số sinh viên (ID): <input type="text" id="id" required>
+        <button type="submit">Thêm</button>
+    </form>
+
+    <h3>Danh sách sinh viên</h3>
+    <ul id="studentList"></ul>
+
+    <h3>Xóa sinh viên theo ID</h3>
+    <input type="text" id="deleteId" placeholder="Nhập ID cần xóa">
+    <button onclick="deleteStudent()">Xóa</button>
+    <p id="deleteMsg" style="color:red"></p>
+
+    <script>
+        // Mảng lưu danh sách sinh viên
+        let students = [];
+
+        // Thêm sinh viên mới
+        document.getElementById('addStudentForm').onsubmit = function(e) {
+            e.preventDefault();
+            let name = document.getElementById('name').value.trim();
+            let age = document.getElementById('age').value.trim();
+            let id = document.getElementById('id').value.trim();
+
+            // Kiểm tra ID đã tồn tại chưa
+            let exists = students.some(sv => sv.id === id);
+            if (exists) {
+                alert('ID đã tồn tại!');
+                return;
+            }
+
+            let student = {
+                name: name,
+                age: age,
+                id: id
+            };
+            students.push(student);
+            showStudents();
+            this.reset();
+        };
+
+        // Hiển thị danh sách sinh viên
+        function showStudents() {
+            let list = document.getElementById('studentList');
+            list.innerHTML = '';
+            students.forEach(function(sv) {
+                let li = document.createElement('li');
+                li.textContent = `Tên: ${sv.name}, Tuổi: ${sv.age}, ID: ${sv.id}`;
+                list.appendChild(li);
+            });
+        }
+
+        // Xóa sinh viên theo ID
+        function deleteStudent() {
+            let deleteId = document.getElementById('deleteId').value.trim();
+            let index = students.findIndex(sv => sv.id === deleteId);
+            let msg = document.getElementById('deleteMsg');
+            if (index !== -1) {
+                students.splice(index, 1);
+                showStudents();
+                msg.textContent = 'Đã xóa sinh viên có ID: ' + deleteId;
+            } else {
+                msg.textContent = 'Không tìm thấy sinh viên với ID này!';
+            }
+            setTimeout(() => msg.textContent = '', 2000);
+            document.getElementById('deleteId').value = '';
+        }
+    </script>
+</body>
+</html></form>

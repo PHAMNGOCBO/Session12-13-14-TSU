@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý danh sách sách</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        label, input, button { margin: 5px 0; display: block; }
+        .book-list { margin-top: 20px; }
+        .book-item { border-bottom: 1px solid #ccc; padding: 5px 0; }
+    </style>
+</head>
+<body>
+    <h2>Quản lý danh sách sách</h2>
+    <div>
+        <h3>Thêm sách mới</h3>
+        <label>ID: <input type="text" id="bookId"></label>
+        <label>Tên sách: <input type="text" id="bookName"></label>
+        <label>Tác giả: <input type="text" id="bookAuthor"></label>
+        <label>Năm xuất bản: <input type="number" id="bookYear"></label>
+        <button onclick="addBook()">Thêm sách</button>
+    </div>
+
+    <div>
+        <h3>Tìm kiếm sách theo tên</h3>
+        <input type="text" id="searchName" placeholder="Nhập tên sách cần tìm">
+        <button onclick="searchBookByName()">Tìm kiếm</button>
+        <div id="searchResult"></div>
+    </div>
+
+    <div>
+        <h3>Xóa sách theo ID</h3>
+        <input type="text" id="deleteId" placeholder="Nhập ID sách cần xóa">
+        <button onclick="deleteBookById()">Xóa sách</button>
+        <div id="deleteResult"></div>
+    </div>
+
+    <div>
+        <h3>Danh sách sách</h3>
+        <button onclick="showBooks()">Hiển thị danh sách</button>
+        <div class="book-list" id="bookList"></div>
+    </div>
+
+    <div>
+        <button onclick="exitProgram()">Thoát chương trình</button>
+    </div>
+
+    <script>
+        // Mảng lưu danh sách sách
+        let books = [];
+
+        // Thêm sách mới
+        function addBook() {
+            let id = document.getElementById('bookId').value.trim();
+            let name = document.getElementById('bookName').value.trim();
+            let author = document.getElementById('bookAuthor').value.trim();
+            let year = document.getElementById('bookYear').value.trim();
+
+            if (!id || !name || !author || !year) {
+                alert('Vui lòng nhập đầy đủ thông tin.');
+                return;
+            }
+
+            // Kiểm tra trùng ID
+            for (let book of books) {
+                if (book.id === id) {
+                    alert('ID đã tồn tại!');
+                    return;
+                }
+            }
+
+            books.push({ id, name, author, year });
+            alert('Đã thêm sách thành công!');
+            document.getElementById('bookId').value = '';
+            document.getElementById('bookName').value = '';
+            document.getElementById('bookAuthor').value = '';
+            document.getElementById('bookYear').value = '';
+            showBooks();
+        }
+
+        // Hiển thị danh sách sách
+        function showBooks() {
+            let list = document.getElementById('bookList');
+            list.innerHTML = '';
+            if (books.length === 0) {
+                list.innerHTML = '<i>Chưa có sách nào.</i>';
+                return;
+            }
+            for (let book of books) {
+                list.innerHTML += `<div class="book-item">
+                    <b>ID:</b> ${book.id} | 
+                    <b>Tên:</b> ${book.name} | 
+                    <b>Tác giả:</b> ${book.author} | 
+                    <b>Năm XB:</b> ${book.year}
+                </div>`;
+            }
+        }
+
+        // Tìm kiếm sách theo tên
+        function searchBookByName() {
+            let keyword = document.getElementById('searchName').value.trim().toLowerCase();
+            let resultDiv = document.getElementById('searchResult');
+            resultDiv.innerHTML = '';
+            if (!keyword) {
+                resultDiv.innerHTML = '<i>Vui lòng nhập tên sách cần tìm.</i>';
+                return;
+            }
+            let found = books.filter(book => book.name.toLowerCase().includes(keyword));
+            if (found.length === 0) {
+                resultDiv.innerHTML = 'Không tìm thấy sách nào.';
+            } else {
+                for (let book of found) {
+                    resultDiv.innerHTML += `<div>
+                        <b>ID:</b> ${book.id} | 
+                        <b>Tên:</b> ${book.name} | 
+                        <b>Tác giả:</b> ${book.author} | 
+                        <b>Năm XB:</b> ${book.year}
+                    </div>`;
+                }
+            }
+        }
+
+        // Xóa sách theo ID
+        function deleteBookById() {
+            let id = document.getElementById('deleteId').value.trim();
+            let resultDiv = document.getElementById('deleteResult');
+            resultDiv.innerHTML = '';
+            let index = books.findIndex(book => book.id === id);
+            if (index === -1) {
+                resultDiv.innerHTML = 'Không tìm thấy sách với ID này.';
+            } else {
+                books.splice(index, 1);
+                resultDiv.innerHTML = 'Đã xóa sách thành công!';
+                showBooks();
+            }
+            document.getElementById('deleteId').value = '';
+        }
+
+        // Thoát chương trình
+        function exitProgram() {
+            if (confirm('Bạn có chắc muốn thoát không?')) {
+                document.body.innerHTML = '<h2>Đã thoát chương trình.</h2>';
+            }
+        }
+    </script>
+</body>
+</html>
