@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra chia hết</title>
+</head>
+<body>
+    <h1>Kiểm tra chia hết</h1>
+    <label for="a">Nhập số a:</label>
+    <input type="text" id="a">
+    <br>
+    <label for="b">Nhập số b:</label>
+    <input type="text" id="b">
+    <br>
+    <button onclick="kiemTraChiaHet()">Kiểm tra</button>
+    <p id="ketQua1"></p>
+    <script>
+        function kiemTraChiaHet() {
+            var a = document.getElementById('a').value;
+            var b = document.getElementById('b').value;
+            var ketQua = '';
+        if (a === '' || b === '') {
+            ketQua = "Vui lòng nhập đầy đủ cả hai số.";
+        } else {
+            a = parseInt(a);
+            b = parseInt(b);
+            if (b === 0) {
+                ketQua = "Không thể chia cho 0.";
+            } else if (a % b === 0) {
+                ketQua = a + " chia hết cho " + b;
+            } else {
+                ketQua = a + " không chia hết cho " + b;
+            }
+        }
+        document.getElementById('ketQua1').innerText = ketQua;
+    }
+</script>
+</body>
+</html>

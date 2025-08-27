@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h3>Bài 1: Độ C sang độ F</h3>
+<input type="number" id="celsius" placeholder="Nhập độ C">
+<button onclick="convertCtoF()">Chuyển đổi</button>
+<script>
+  function convertCtoF() {
+    let c = Number(document.getElementById('celsius').value);
+    let f = (c * 9/5) + 32;
+    alert(`${c}°C = ${f.toFixed(2)}°F`);
+  }
+</script>
+<h3>Bài 2: Mét sang Feet</h3>
+<input type="number" id="meter" placeholder="Nhập mét">
+<button onclick="convertMeterToFeet()">Chuyển đổi</button>
+<script>
+  function convertMeterToFeet() {
+    let m = Number(document.getElementById('meter').value);
+    let ft = m * 3.2808;
+    alert(`${m} mét = ${ft.toFixed(2)} feet`);
+  }
+</script>
+<h3>Bài 3: Diện tích hình vuông</h3>
+<input type="number" id="squareSide" placeholder="Cạnh a">
+<button onclick="calcSquareArea()">Tính</button>
+<script>
+  function calcSquareArea() {
+    let a = Number(document.getElementById('squareSide').value);
+    let area = a * a;
+    alert(`Diện tích hình vuông = ${area}`);
+  }
+</script>
+<h3>Bài 4: Diện tích hình chữ nhật</h3>
+<input type="number" id="rectA" placeholder="Cạnh a">
+<input type="number" id="rectB" placeholder="Cạnh b">
+<button onclick="calcRectArea()">Tính</button>
+<script>
+  function calcRectArea() {
+    let a = Number(document.getElementById('rectA').value);
+    let b = Number(document.getElementById('rectB').value);
+    let area = a * b;
+    alert(`Diện tích hình chữ nhật = ${area}`);
+  }
+</script>
+<h3>Bài 5: Tiền taxi tam giác vuông</h3>
+<input type="number" id="sideA" placeholder="Cạnh a">
+<input type="number" id="sideB" placeholder="Cạnh b">
+<button onclick="calcTaxiFare()">Tính</button>
+<script>
+  function calcTaxiFare() {
+    let a = Number(document.getElementById('sideA').value);
+    let b = Number(document.getElementById('sideB').value);
+    let distance = Math.sqrt(a*a + b*b);
+    let fare = distance * 10000;
+    alert(`Quãng đường = ${distance.toFixed(2)}m, Tiền taxi = ${fare.toLocaleString()} VND`);
+  }
+</script>
+<h3>Bài 6: PT bậc 1</h3>
+<input type="number" id="a1" placeholder="a">
+<input type="number" id="b1" placeholder="b">
+<button onclick="solveLinear()">Giải</button>
+<script>
+  function solveLinear() {
+    let a = Number(document.getElementById('a1').value);
+    let b = Number(document.getElementById('b1').value);
+    if (a === 0) {
+      alert(b === 0 ? "Vô số nghiệm" : "Vô nghiệm");
+    } else {
+      let x = -b / a;
+      alert(`Nghiệm x = ${x}`);
+    }
+  }
+</script>
+<h3>Bài 7: PT bậc 2</h3>
+<input type="number" id="a2" placeholder="a">
+<input type="number" id="b2" placeholder="b">
+<input type="number" id="c2" placeholder="c">
+<button onclick="solveQuadratic()">Giải</button>
+<script>
+  function solveQuadratic() {
+    let a = Number(document.getElementById('a2').value);
+    let b = Number(document.getElementById('b2').value);
+    let c = Number(document.getElementById('c2').value);
+    let delta = b*b - 4*a*c;
+    if (a === 0) {
+      alert("Không phải PT bậc 2");
+    } else if (delta < 0) {
+      alert("Vô nghiệm");
+    } else if (delta === 0) {
+      let x = -b / (2*a);
+      alert(`Nghiệm kép x = ${x}`);
+    } else {
+      let x1 = (-b + Math.sqrt(delta)) / (2*a);
+      let x2 = (-b - Math.sqrt(delta)) / (2*a);
+      alert(`x1 = ${x1}, x2 = ${x2}`);
+    }
+  }
+</script>
+<h3>Bài 8: Ngày trong tuần</h3>
+<input type="number" id="dayNum" placeholder="Nhập số (1-7)">
+<button onclick="showDay()">Xem ngày</button>
+<script>
+  function showDay() {
+    let d = Number(document.getElementById('dayNum').value);
+    let day;
+    switch (d) {
+      case 1: day = "Chủ nhật"; break;
+      case 2: day = "Thứ hai"; break;
+      case 3: day = "Thứ ba"; break;
+      case 4: day = "Thứ tư"; break;
+      case 5: day = "Thứ năm"; break;
+      case 6: day = "Thứ sáu"; break;
+      case 7: day = "Thứ bảy"; break;
+      default: day = "Không hợp lệ";
+    }
+    alert(day);
+  }
+</script>
+<h3>Bài 9: Kiểm tra số nguyên tố</h3>
+<input type="number" id="primeCheck" placeholder="Nhập số">
+<button onclick="checkPrime()">Kiểm tra</button>
+<script>
+  function checkPrime() {
+    let n = Number(document.getElementById('primeCheck').value);
+    if (n < 2) return alert("Không phải số nguyên tố");
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+      if (n % i === 0) return alert("Không phải số nguyên tố");
+    }
+    alert("Là số nguyên tố");
+  }
+</script>
+<h3>Bài 10: In số nguyên tố < 120</h3>
+<button onclick="printPrimes()">In ra</button>
+<script>
+  function printPrimes() {
+    let result = '';
+    for (let n = 2; n < 120; n++) {
+      let isPrime = true;
+      for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) result += n + ' ';
+    }
+    alert(result.trim());
+  }
+</script>
+</body>
+</html>

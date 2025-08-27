@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Luyện Tập Vòng Lặp</title>
+</head>
+<body>
+    <h3>Bài 1: Đếm từ 1 đến 100</h3>
+<button onclick="countTo100()">Bắt đầu</button>
+<script>
+  function countTo100() {
+    for (let i = 1; i <= 100; i++) {
+      console.log(i);
+      if (i === 99) {
+        alert("Đã hoàn thành đến 99!");
+      }
+    }
+    alert("Hoàn tất đếm đến 100!");
+  }
+</script>
+<h3>Bài 2: Kiểm tra nhiệt độ</h3>
+<button onclick="checkTemperature()">Nhập nhiệt độ</button>
+<script>
+  function checkTemperature() {
+    let temp = Number(prompt("Nhập nhiệt độ hiện tại:"));
+    if (temp > 100) {
+      alert("Nhiệt độ quá cao! Vui lòng giảm nhiệt độ.");
+    } else if (temp < 20) {
+      alert("Nhiệt độ quá thấp! Vui lòng tăng nhiệt độ.");
+    } else {
+      alert("Nhiệt độ ổn định.");
+    }
+  }
+</script>
+<h3>Bài 3 & 5: Tổng 20 số Fibonacci đầu tiên</h3>
+<button onclick="sumFibonacci()">Tính tổng</button>
+<script>
+  function sumFibonacci() {
+    let a = 0, b = 1, sum = 1;
+    for (let i = 2; i < 20; i++) {
+      let next = a + b;
+      sum += next;
+      a = b;
+      b = next;
+    }
+    alert(`Tổng 20 số đầu tiên trong dãy Fibonacci là: ${sum}`);
+  }
+</script>
+<h3>Bài 4: 5 số đầu tiên trong dãy Fibonacci</h3>
+<button onclick="firstFiveFibonacci()">Hiển thị</button>
+<script>
+  function firstFiveFibonacci() {
+    let a = 0, b = 1;
+    let result = [a, b];
+    for (let i = 2; i < 5; i++) {
+      let next = a + b;
+      result.push(next);
+      a = b;
+      b = next;
+    }
+    alert(`5 số đầu tiên: ${result.join(', ')}`);
+  }
+</script>
+<h3>Bài 6: FizzBuzz</h3>
+<button onclick="runFizzBuzz()">Chạy</button>
+<script>
+  function runFizzBuzz() {
+    let output = '';
+    for (let i = 1; i <= 100; i++) {
+      if (i % 15 === 0) output += "FizzBuzz\n";
+      else if (i % 3 === 0) output += "Fizz\n";
+      else if (i % 5 === 0) output += "Buzz\n";
+      else output += i + "\n";
+    }
+    alert(output);
+  }
+</script>
+<h3>Bài 8: Game đoán số</h3>
+<button onclick="guessGame()">Chơi game</button>
+<script>
+  function guessGame() {
+    let input = Number(prompt("Nhập số từ 1 đến 100:"));
+    if (input === 1) {
+      let info = prompt("Bạn đã chọn số 1. Nhập thông tin:");
+      alert(`Thông tin bạn nhập: ${info}`);
+    } else if (input === 2) {
+      let guess = Number(prompt("Dự đoán một số từ 1 đến 10:"));
+      let correct = Math.floor(Math.random() * 10) + 1;
+      if (guess === correct) {
+        alert("Bạn đã đoán đúng!");
+      } else {
+        alert(`Sai rồi! Số đúng là ${correct}`);
+      }
+    } else {
+      alert(`Bạn đã nhập: ${input}`);
+    }
+  }
+</script>
+</body>
+</html>

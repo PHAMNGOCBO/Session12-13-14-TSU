@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiển thị 20 số nguyên tố đầu tiên</title>
+</head>
+<body>
+    <h2>20 số nguyên tố đầu tiên:</h2>
+    <ul id="prime-list"></ul>
+
+    <script>
+        function isPrime(n) {
+            if (n < 2) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        let count = 0;
+        let num = 2;
+        const ul = document.getElementById('prime-list');
+
+        while (count < 20) {
+            if (isPrime(num)) {
+                const li = document.createElement('li');
+                li.textContent = num;
+                ul.appendChild(li);
+                count++;
+            }
+            num++;
+        }
+    </script>
+</body>
+</html>

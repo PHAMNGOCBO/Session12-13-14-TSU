@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Luyện Tập Vòng Lặp 2</title>
+</head>
+<body>
+    <h3>Bài 1: In dãy Fibonacci</h3>
+<input type="number" id="fibCount" placeholder="Số lượng phần tử">
+<button onclick="printFibonacci()">In dãy</button>
+<script>
+  function printFibonacci() {
+    let count = Number(document.getElementById('fibCount').value);
+    let a = 0, b = 1, result = [a, b];
+    for (let i = 2; i < count; i++) {
+      let next = a + b;
+      result.push(next);
+      a = b;
+      b = next;
+    }
+    alert(`Dãy Fibonacci: ${result.slice(0, count).join(', ')}`);
+  }
+</script>
+<h3>Bài 2: Tính giai thừa</h3>
+<input type="number" id="factorialInput" placeholder="Nhập số nguyên dương">
+<button onclick="calcFactorial()">Tính</button>
+<script>
+  function calcFactorial() {
+    let n = Number(document.getElementById('factorialInput').value);
+    if (n < 0) return alert("Vui lòng nhập số nguyên dương!");
+    let result = 1;
+    for (let i = 2; i <= n; i++) {
+      result *= i;
+    }
+    alert(`${n}! = ${result}`);
+  }
+</script>
+<h3>Bài 3: In tam giác vuông</h3>
+<input type="number" id="triangleSize" placeholder="Chiều cao tam giác">
+<button onclick="printTriangles()">In tam giác</button>
+<pre id="triangleOutput"></pre>
+<script>
+  function printTriangles() {
+    let n = Number(document.getElementById('triangleSize').value);
+    let output = '';
+
+    // Góc vuông dưới trái
+    output += 'Góc vuông dưới trái:\n';
+    for (let i = 1; i <= n; i++) {
+      output += '*'.repeat(i) + '\n';
+    }
+
+    // Góc vuông trên trái
+    output += '\nGóc vuông trên trái:\n';
+    for (let i = n; i >= 1; i--) {
+      output += '*'.repeat(i) + '\n';
+    }
+
+    // Góc vuông dưới phải
+    output += '\nGóc vuông dưới phải:\n';
+    for (let i = 1; i <= n; i++) {
+      output += ' '.repeat(n - i) + '*'.repeat(i) + '\n';
+    }
+
+    // Góc vuông trên phải
+    output += '\nGóc vuông trên phải:\n';
+    for (let i = n; i >= 1; i--) {
+      output += ' '.repeat(n - i) + '*'.repeat(i) + '\n';
+    }
+
+    document.getElementById('triangleOutput').textContent = output;
+  }
+</script>
+</body>
+</html>
