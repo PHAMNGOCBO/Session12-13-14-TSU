@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Đếm số lần xuất hiện của số nguyên trong mảng</title>
+</head>
+<body>
+    <h2>Bài tập: Đếm số lần xuất hiện của số nguyên trong mảng</h2>
+    <p>
+        Nhập vào một số nguyên để kiểm tra số lần xuất hiện trong mảng:
+    </p>
+    <input type="number" id="inputNumber" placeholder="Nhập số nguyên k">
+    <button onclick="countOccurrences()">Kiểm tra</button>
+    <p id="result"></p>
+
+    <script>
+        // Bước 1: Khai báo mảng số nguyên có sẵn từ 10 đến 20 phần tử
+        // Ví dụ:
+        const arr = [1, 5, 3, 7, 5, 8, 9, 5, 2, 4, 5, 6, 7, 8, 9, 5, 3, 2, 1, 5];
+
+        // Bước 2: Hàm đếm số lần xuất hiện của k trong mảng
+        function countOccurrences() {
+            // Lấy giá trị người dùng nhập vào
+            const k = parseInt(document.getElementById('inputNumber').value);
+
+            // Kiểm tra nếu chưa nhập số
+            if (isNaN(k)) {
+                document.getElementById('result').innerText = "Vui lòng nhập một số nguyên.";
+                return;
+            }
+
+            // Đếm số lần xuất hiện của k trong mảng
+            let count = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] === k) {
+                    count++;
+                }
+            }
+
+            // Hiển thị kết quả ra màn hình
+            document.getElementById('result').innerText = 
+                `Số ${k} xuất hiện ${count} lần trong mảng.`;
+        }
+    </script>
+</body>
+</html>
